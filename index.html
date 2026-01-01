@@ -3,41 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <title>Travel Budget Calculator</title>
-
-  <!-- SheetJS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
-  <!-- jsPDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+<div class="container">
 
-<h2>Travel Budget Calculator</h2>
+  <h2>Travel Budget Calculator</h2>
 
-<input type="file" id="fileInput" accept=".xlsx">
+  <div class="form-group">
+    <label>City</label>
+    <select id="city" onchange="populateHotels()"></select>
+  </div>
 
-<br><br>
+  <div class="form-group">
+    <label>Hotel</label>
+    <select id="hotel" onchange="populateRooms()"></select>
+  </div>
 
-<select id="city"></select>
-<select id="hotel"></select>
-<select id="room"></select>
-<select id="plan"></select>
+  <div class="form-group">
+    <label>Room Category</label>
+    <select id="room" onchange="populatePlans()"></select>
+  </div>
 
-<br><br>
+  <div class="form-group">
+    <label>Plan</label>
+    <select id="plan"></select>
+  </div>
 
-<input type="number" id="single" placeholder="Single Rooms">
-<input type="number" id="double" placeholder="Double Rooms">
-<input type="number" id="extra" placeholder="Extra Persons">
+  <div class="form-row">
+    <div>
+      <label>Single Rooms</label>
+      <input type="number" id="singleCount" min="0" value="0">
+    </div>
+    <div>
+      <label>Double Rooms</label>
+      <input type="number" id="doubleCount" min="0" value="1">
+    </div>
+    <div>
+      <label>Extra Persons</label>
+      <input type="number" id="extraCount" min="0" value="0">
+    </div>
+  </div>
 
-<br><br>
+  <div class="form-group">
+    <label>Start Date</label>
+    <input type="date" id="startDate">
+  </div>
 
-<button onclick="calculate()">Calculate Budget</button>
-<button onclick="exportPDF()">Export PDF</button>
+  <div class="form-group">
+    <label>End Date</label>
+    <input type="date" id="endDate">
+  </div>
 
-<h3 id="result"></h3>
+  <button onclick="addLocation()">➕ Add Location</button>
+  <button class="pdf-btn" onclick="downloadPDF()">Download PDF</button>
+  <button class="confirm-btn" onclick="confirmBooking()">✅ Confirm & Email Booking</button>
 
+  <div id="result" class="result-box"></div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
